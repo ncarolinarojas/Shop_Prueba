@@ -6,6 +6,7 @@ import MyOrders from './MyOrders/index'
 import NotFound from './NotFound/index'
 import SingIn from './SingIn/index'
 import { Routes, Route } from 'react-router-dom'
+import Navbar from '../Components/Navbar'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/sing-in' element={<SingIn />}/>
         <Route path='/not-found' element={<NotFound />}/>
       </Routes>
+      <Navbar/>
     </>
   )
 }
