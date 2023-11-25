@@ -7,10 +7,12 @@ import NotFound from './NotFound'
 import SingIn from './SingIn'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from '../Components/Navbar'
+import { ShoppingCarProvider } from '../Context'
 
 function App() {
   return (
     <>
+    <ShoppingCarProvider>
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/my-account' element={<MyAccount />}/>
@@ -20,6 +22,7 @@ function App() {
         <Route path='/not-found' element={<NotFound />}/>
       </Routes>
       <Navbar/>
+      </ShoppingCarProvider>
     </>
   )
 }
