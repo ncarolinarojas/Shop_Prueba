@@ -8,20 +8,22 @@ import SingIn from './SingIn'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from '../Components/Navbar'
 import { ShoppingCarProvider } from '../Context'
+import CheckoutMenu from '../Components/CheckoutMenu'
 
 function App() {
   return (
     <>
-    <ShoppingCarProvider>
-      <Routes>
-        <Route path='/' element={<Home />}/>
-        <Route path='/my-account' element={<MyAccount />}/>
-        <Route path='/my-orders' element={<MyOrders />}/>
-        <Route path='/my-order' element={<MyOrder />}/>
-        <Route path='/sing-in' element={<SingIn />}/>
-        <Route path='/not-found' element={<NotFound />}/>
-      </Routes>
-      <Navbar/>
+      <ShoppingCarProvider>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/my-account' element={<MyAccount />} />
+          <Route path='/my-orders' element={<MyOrders />} />
+          <Route path='/my-order' element={<MyOrder />} />
+          <Route path='/sing-in' element={<SingIn />} />
+          <Route path='/not-found' element={<NotFound />} />
+        </Routes>
+        <Navbar />
+        <CheckoutMenu />
       </ShoppingCarProvider>
     </>
   )

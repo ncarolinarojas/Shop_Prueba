@@ -7,7 +7,6 @@ const ProductDetail = () => {
 
     const context = useContext(ShoppingCarContext)
 
-    console.log(context.detailProduct)
 
     return (
         <aside
