@@ -4,9 +4,10 @@ export const ShoppingCarContext = createContext()
 
 export const ShoppingCarProvider = ({ children }) => {
 
-    const [count, setCount] = useState(0) //Estado para contar los add car que haya el usuario
-    const [detail, setDetail] = useState(false) //Estado para mostrar el detalle del producto
-    const [detailProduct, setDetailProduct] = useState(null) //Estado para el renderizado del detail
+    const [count, setCount] = useState(0) //state to count to add car users has made
+    const [detail, setDetail] = useState(false) // state to show details product section
+    const [detailProduct, setDetailProduct] = useState({}) //state to show details product
+    const [shoppingCar, setShoppingCar] = useState([]) // state to save all product people going to buy
 
     const isDetailOpen = () => setDetail(true)
     const isDetailClose = () => setDetail(false)
@@ -18,7 +19,11 @@ export const ShoppingCarProvider = ({ children }) => {
                 setCount,
                 isDetailOpen,
                 isDetailClose,
-                detail
+                detail,
+                detailProduct,
+                setDetailProduct,
+                shoppingCar,
+                setShoppingCar
             }
         }>
             {children}
