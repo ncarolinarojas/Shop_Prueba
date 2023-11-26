@@ -18,9 +18,9 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/my-account' element={<MyAccount />} />
           <Route path='/my-orders' element={<MyOrders />} />
-          <Route path='/my-order' element={<MyOrder />} />
+          <Route path='/my-orders/last' element={<MyOrder />} />
           <Route path='/sing-in' element={<SingIn />} />
-          <Route path='/not-found' element={<NotFound />} />
+          <Route path='/*' element={<NotFound />} />
         </Routes>
         <Navbar />
         <CheckoutMenu />

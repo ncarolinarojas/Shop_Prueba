@@ -2,7 +2,7 @@ import Layout from "../../Components/Layout";
 
 function MyOrders() {
   return (
-    <Layout>MyOrders</Layout>
+    <Layout>MyOrders Funciona</Layout>
   )
 }
 

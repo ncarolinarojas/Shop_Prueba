@@ -19,6 +19,9 @@ export const ShoppingCarProvider = ({ children }) => {
     const isDetailOpen = () => setDetail(true)
     const isDetailClose = () => setDetail(false)
 
+    //State to save all products that a user want to shop
+    const [order, setOrder] = useState([])
+
     return (
         <ShoppingCarContext.Provider value={
             {
@@ -33,7 +36,9 @@ export const ShoppingCarProvider = ({ children }) => {
                 setShoppingCar,
                 checkOutSideMenuOpen,
                 isCheckOutOpen,
-                isCheckOutClose
+                isCheckOutClose,
+                order,
+                setOrder
             }
         }>
             {children}
