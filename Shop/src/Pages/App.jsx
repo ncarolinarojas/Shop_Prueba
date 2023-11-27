@@ -16,6 +16,12 @@ function App() {
       <ShoppingCarProvider>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/clothes' element={<Home />} />
+          <Route path='/electronics' element={<Home />} />
+          <Route path='/furnitures' element={<Home />} />
+          <Route path='/toys' element={<Home />} />
+          <Route path='/others-products' element={<Home />} />
+          <Route path='/all-products' element={<Home />} />
           <Route path='/my-account' element={<MyAccount />} />
           <Route path='/my-orders' element={<MyOrders />} />
           <Route path='/my-orders/last' element={<MyOrder />} />

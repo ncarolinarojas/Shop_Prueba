@@ -9,7 +9,6 @@ import { totalPrice } from '../utils/index'
 const CheckoutMenu = () => {
 
     const context = useContext(ShoppingCarContext)
-    console.log(context.shoppingCar)
 
     const handleDeleteItem = (id) => {
         const filteredProducts = context.shoppingCar.filter(product =>

@@ -2,30 +2,56 @@ import { useState, useEffect } from 'react'
 import Layout from "../../Components/Layout"
 import Card from "../../Components/Card"
 import ProductDetail from '../../Components/ProductDetail'
+import { useContext } from "react";
+import { ShoppingCarContext } from '../../Context/index';
 
 function Home() {
 
-  const [products, setProducts] = useState(null)
+  const context = useContext(ShoppingCarContext);
 
-  useEffect(() => {
-    fetch('https://api.escuelajs.co/api/v1/products')
-      .then(response => response.json())
-      .then(data => setProducts(data))
-  }, [])
-
-  console.log(products)
+  const validateInformationToShow = () => {
+    if (context.searchedProducts?.length > 0) {
+      if (context.filteredProducts?.length > 0) {
+        return (
+          <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
+            {
+              context.filteredProducts?.map(product => (
+                <Card key={product.id} data={product} />
+              ))
+            }
+          </div>
+        )
+      } else {
+        return (
+          <div>We can't found that article</div>
+        )
+      }
+    } else {
+      return (
+        <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
+          {
+            context.products?.map(product => (
+              <Card key={product.id} data={product} />
+            ))
+          }
+        </div>
+      )
+    }
+  }
 
   return (
     <Layout>
-      Home
-      <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
-        {
-          products?.map(product => (
-            <Card key={product.id} data={product} />
-          ))
-        }
+      <div>
+        <h1 className='font-medium text-xl'>Home</h1>
       </div>
-      <ProductDetail/>
+      <input
+        type="text"
+        placeholder='Search your products favorite'
+        className='rounded-lg border border-black w-80 p-4 mb-4'
+        onChange={(event) => context.setSearchedProducts(event.target.value)}
+      />
+      {validateInformationToShow()}
+      <ProductDetail />
     </Layout>
   )
 }

@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 
 export const ShoppingCarContext = createContext()
 
@@ -22,6 +22,40 @@ export const ShoppingCarProvider = ({ children }) => {
     //State to save all products that a user want to shop
     const [order, setOrder] = useState([])
 
+    //List of products general
+    const [products, setProducts] = useState(null)
+
+    //List filtered products 
+    const [filteredProducts, setFilteredProducts] = useState(null)
+
+    useEffect(() => {
+        fetch('https://api.escuelajs.co/api/v1/products')
+            .then(response => response.json())
+            .then(data => setProducts(data))
+    }, [])
+
+    //State to keep the search
+    const [searchedProducts, setSearchedProducts] = useState(null)
+
+    //function to filter products
+    const productsFiltered = (products, searchedProducts) => {
+        return products?.filter(product => product.title.toLowerCase().includes(searchedProducts.toLowerCase()))
+    }
+
+    //State to show in home a search by category
+    const [searchByCategory, setSearchByCategory] = useState(null)
+
+    //Function to filter products by category
+    const productsByCategory = (products, searchByCategory) => {
+        return products?.filter(product => product.category.toLowerCase().includes(searchByCategory.toLowerCase()))
+    }
+
+    useEffect(() => {
+        if(searchedProducts) setFilteredProducts(productsFiltered(products, searchedProducts))
+        if (searchByCategory) setFilteredProducts(productsByCategory(products, searchByCategory))
+    }, [products, searchedProducts])
+
+
     return (
         <ShoppingCarContext.Provider value={
             {
@@ -38,7 +72,16 @@ export const ShoppingCarProvider = ({ children }) => {
                 isCheckOutOpen,
                 isCheckOutClose,
                 order,
-                setOrder
+                setOrder,
+                products,
+                setProducts,
+                searchedProducts,
+                setSearchedProducts,
+                productsFiltered, 
+                filteredProducts,
+                searchByCategory, 
+                setSearchByCategory,
+                productsByCategory
             }
         }>
             {children}
