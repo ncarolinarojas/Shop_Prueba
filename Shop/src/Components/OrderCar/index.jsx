@@ -4,6 +4,12 @@ const OrderCar = props => {
 
     const {id, title, imageURL, price, handleDeleteItem} = props
 
+    let renderXMarkIcon
+
+    if(handleDeleteItem) {
+        renderXMarkIcon= <XMarkIcon onClick={() => handleDeleteItem(id)} className='h-8 w-8 text-black/50 cursor-pointer'/>
+    }
+
     return(
         <div className='flex justify-between items-center mb-2'>
             <div className='flex items-center gap-2'>
@@ -15,9 +21,7 @@ const OrderCar = props => {
             <div className='flex items-center gap-2'>
                 <p className='text-lg font-medium'> {'$' +price}</p>
                 <div>
-                    <XMarkIcon 
-                    onClick={() => handleDeleteItem(id)}
-                    className='h-8 w-8 text-black/50 cursor-pointer'/>
+                    {renderXMarkIcon}
                 </div>
             </div>
         </div>

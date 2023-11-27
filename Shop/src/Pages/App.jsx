@@ -19,6 +19,7 @@ function App() {
           <Route path='/my-account' element={<MyAccount />} />
           <Route path='/my-orders' element={<MyOrders />} />
           <Route path='/my-orders/last' element={<MyOrder />} />
+          <Route path='/my-orders/:id' element={<MyOrder />} />
           <Route path='/sing-in' element={<SingIn />} />
           <Route path='/*' element={<NotFound />} />
         </Routes>
