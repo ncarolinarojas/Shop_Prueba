@@ -45,15 +45,33 @@ export const ShoppingCarProvider = ({ children }) => {
     //State to show in home a search by category
     const [searchByCategory, setSearchByCategory] = useState(null)
 
+
     //Function to filter products by category
     const productsByCategory = (products, searchByCategory) => {
-        return products?.filter(product => product.category.toLowerCase().includes(searchByCategory.toLowerCase()))
+        return products?.filter(product => product.category.name.toLowerCase().includes(searchByCategory.toLowerCase()))
+    }
+
+    const filterBy = (searchType, products, searchedProducts, searchByCategory) => {
+        if (searchType === 'BY_TITLE') {
+            return productsFiltered(products, searchedProducts)
+        }
+        if (searchType === 'BY_CATEGORY') {
+            return productsByCategory(products, searchByCategory)
+        }
+        if (searchType === 'BY_TITLE_AND_CATEGORY') {
+            return productsByCategory(products, searchByCategory).filter(product => product.title.toLowerCase().includes(searchedProducts.toLowerCase()))
+        }
+        if (!searchType) {
+            return products
+        }
     }
 
     useEffect(() => {
-        if(searchedProducts) setFilteredProducts(productsFiltered(products, searchedProducts))
-        if (searchByCategory) setFilteredProducts(productsByCategory(products, searchByCategory))
-    }, [products, searchedProducts])
+        if (searchedProducts && searchByCategory) setFilteredProducts(filterBy('BY_TITLE_AND_CATEGORY', products, searchedProducts, searchByCategory))
+        if (searchedProducts && !searchByCategory) setFilteredProducts(filterBy('BY_TITLE', products, searchedProducts, searchByCategory))
+        if (!searchedProducts && searchByCategory) setFilteredProducts(filterBy('BY_CATEGORY', products, searchedProducts, searchByCategory))
+        if (!searchedProducts && !searchByCategory) setFilteredProducts(filterBy(null, products, searchedProducts, searchByCategory))
+    }, [products, searchedProducts, searchByCategory])
 
 
     return (
@@ -77,9 +95,9 @@ export const ShoppingCarProvider = ({ children }) => {
                 setProducts,
                 searchedProducts,
                 setSearchedProducts,
-                productsFiltered, 
+                productsFiltered,
                 filteredProducts,
-                searchByCategory, 
+                searchByCategory,
                 setSearchByCategory,
                 productsByCategory
             }

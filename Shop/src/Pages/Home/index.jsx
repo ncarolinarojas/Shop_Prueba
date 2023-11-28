@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import Layout from "../../Components/Layout"
 import Card from "../../Components/Card"
 import ProductDetail from '../../Components/ProductDetail'
@@ -10,31 +9,19 @@ function Home() {
   const context = useContext(ShoppingCarContext);
 
   const validateInformationToShow = () => {
-    if (context.searchedProducts?.length > 0) {
-      if (context.filteredProducts?.length > 0) {
-        return (
-          <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
-            {
-              context.filteredProducts?.map(product => (
-                <Card key={product.id} data={product} />
-              ))
-            }
-          </div>
-        )
-      } else {
-        return (
-          <div>We can't found that article</div>
-        )
-      }
-    } else {
+    if (context.filteredProducts?.length > 0) {
       return (
         <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
           {
-            context.products?.map(product => (
+            context.filteredProducts?.map(product => (
               <Card key={product.id} data={product} />
             ))
           }
         </div>
+      )
+    } else {
+      return (
+        <div>We can't found that article</div>
       )
     }
   }

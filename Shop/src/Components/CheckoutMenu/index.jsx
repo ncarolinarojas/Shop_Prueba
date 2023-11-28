@@ -27,8 +27,9 @@ const CheckoutMenu = () => {
         }
 
         context.setOrder([...context.order, orderToAdd])
-
         context.setShoppingCar([])
+        context.setSearchedProducts(null)
+        context.setCount(0)
     }
 
 
